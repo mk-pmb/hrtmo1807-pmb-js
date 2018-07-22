@@ -2,7 +2,7 @@
 /* -*- tab-width: 2 -*- */
 'use strict';
 
-var parseHumanDuration = require('../'),
+var parseHumanDuration = require('timestring-notsep'),
   ctf = require('callback-timeout-flexible');
 
 function startTimeoutTimer(opt) {
@@ -18,7 +18,7 @@ function startTimeoutTimer(opt) {
   tmo = parseHumanDuration(limitHuman);
   tmo = Object.assign({}, opt, { limitSec: tmo });
   delete tmo.limit;
-  return ctf(opt);
+  return ctf(tmo);
 }
 
 module.exports = startTimeoutTimer;
