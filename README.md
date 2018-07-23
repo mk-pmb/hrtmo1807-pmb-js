@@ -25,6 +25,15 @@ This module exports one function:
 * all other options supported by `callback-timeout-flexible`
   that aren't about timespans.
 
+### Quick recap from CTF
+
+The result is __not__ an opaque timer ID or timer object, but instead
+a callback function that can be used to decide the outcome early.
+
+`cb` will carry a `timeout` property that holds the timeout control object
+(TCO), which in turn has methods like `.renew()` and `.abandon()`.
+
+
 
 
 <!--#toc stop="scan" -->
