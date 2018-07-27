@@ -2,7 +2,7 @@
 /* -*- tab-width: 2 -*- */
 'use strict';
 
-var parseHumanDuration = require('timestring-notsep'),
+var ptd = require('parse-human-timeout-duration'),
   ctf = require('callback-timeout-flexible');
 
 function startTimeoutTimer(opt) {
@@ -12,10 +12,8 @@ function startTimeoutTimer(opt) {
     cfgKey = limitHuman + (opt.cfgSuffix || '');
     limitHuman = opt.cfgDict[cfgKey];
   }
-  if (limitHuman === false) { return false; }
-  if (limitHuman === 'off') { return false; }
-  if (limitHuman === 'never') { return false; }
-  tmo = parseHumanDuration(limitHuman);
+  tmo = ptd(limitHuman, opt);
+  if (tmo === false) { return tmo; }
   tmo = Object.assign({}, opt, { limitSec: tmo });
   delete tmo.limit;
   return ctf(tmo);
